@@ -154,7 +154,7 @@ const faqs = [
   ],
   [
     "Можно ли создать вызов для компании?",
-    "Да. Корпоративный формат — дополнительный сценарий платформы для спортивных программ внутри команды. Основные челленджи при этом открыты всем.",
+    "Мы готовим отдельный B2B-контур: закрытые корпоративные челленджи, битвы отделов и зарубы между компаниями. Пока функция находится в разработке, а основные B2C-челленджи и LIVE-дуэли продолжают работать как сейчас.",
   ],
   [
     "Где посмотреть правила платформы?",
@@ -200,6 +200,7 @@ export default function Home() {
           <a href="#mechanics" onClick={() => setMenuOpen(false)}>Как работает</a>
           <a href="#results" onClick={() => setMenuOpen(false)}>Уже участвуют</a>
           <a href="#modes" onClick={() => setMenuOpen(false)}>LIVE-дуэли</a>
+          <a href="#business" onClick={() => setMenuOpen(false)}>Компаниям · скоро</a>
           <a href="#faq" onClick={() => setMenuOpen(false)}>Вопросы</a>
         </nav>
         <a className="header-cta" href={APP_URL} target="_blank" rel="noreferrer">Открыть приложение <ArrowIcon /></a>
@@ -432,18 +433,80 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="business section-shell" id="business" data-reveal>
-        <div className="business-rings" aria-hidden="true"><i /><i /><i /></div>
-        <div className="business-copy">
-          <div className="section-kicker section-kicker--dark">07 · ДОПОЛНИТЕЛЬНЫЙ ФОРМАТ</div>
-          <h2>ЧЕЛЛЕНДЖИ<br /><em>ДЛЯ КОМАНД.</em></h2>
-          <p>Основная платформа открыта каждому. Компании могут дополнительно проводить отдельные спортивные вызовы для сотрудников.</p>
+      <section className="business-stage section-shell" id="business">
+        <article className="business-hero" data-reveal>
+          <div className="business-rings" aria-hidden="true"><i /><i /><i /></div>
+          <div className="business-copy">
+            <div className="business-headline-row">
+              <div className="section-kicker section-kicker--dark">07 · СЛЕДУЮЩИЙ ЭТАП ПЛАТФОРМЫ</div>
+              <span className="business-dev-badge"><i /> В РАЗРАБОТКЕ</span>
+            </div>
+            <h2>ЗАБЬЁМСЯ<br /><em>ДЛЯ БИЗНЕСА.</em></h2>
+            <p>Готовим корпоративные челленджи, битвы отделов и официальные зарубы между компаниями — с равными составами, закрытым пространством и измеримой вовлечённостью.</p>
+            <div className="business-tags" aria-label="Будущие возможности">
+              <span>КОРПОРАТИВНЫЕ ЧЕЛЛЕНДЖИ</span>
+              <span>БИТВЫ ОТДЕЛОВ</span>
+              <span>КОМПАНИЯ VS КОМПАНИЯ</span>
+            </div>
+          </div>
+          <aside className="business-promise">
+            <span>НЕ ФОРМАЛЬНАЯ АКТИВНОСТЬ</span>
+            <strong>КОМАНДА.<br />СОПЕРНИК.<br />РЕЗУЛЬТАТ.</strong>
+            <p>Меньше марафонов «для галочки». Больше настоящего азарта и желания не слиться перед своими.</p>
+          </aside>
+        </article>
+
+        <div className="business-levels" aria-label="Три уровня корпоративной игры">
+          <article data-reveal>
+            <span>01 · ВНУТРИ КОМПАНИИ</span>
+            <strong>ОДНА ЦЕЛЬ<br />ДЛЯ ВСЕЙ КОМАНДЫ</strong>
+            <p>Закрытый челлендж, ежедневные подтверждения и общий прогресс сотрудников.</p>
+          </article>
+          <article data-reveal>
+            <span>02 · БИТВА ОТДЕЛОВ</span>
+            <strong>ПРОДАЖИ<br />ПРОТИВ РАЗРАБОТКИ</strong>
+            <p>Отделы и филиалы собирают составы и борются за внутренний кубок компании.</p>
+          </article>
+          <article data-reveal>
+            <span>03 · B2B-ЛИГА</span>
+            <strong>КОМПАНИЯ<br />ПРОТИВ КОМПАНИИ</strong>
+            <p>Официальный вызов сопернику, история матчей и отдельный корпоративный рейтинг.</p>
+          </article>
         </div>
-        <div className="business-features">
-          <article><UsersIcon /><div><h3>СВОЯ КОМАНДА</h3><p>Единая цель, общий ритм и поддержка коллег.</p></div></article>
-          <article><CheckIcon /><div><h3>ПОНЯТНЫЙ ПРОГРЕСС</h3><p>Серии и подтверждённые результаты в одном месте.</p></div></article>
+
+        <div className="business-system" data-reveal>
+          <article className="fair-match">
+            <div className="business-card-label"><span>ЧЕСТНЫЙ БАЛАНС</span><b>РАВНЫЕ СОСТАВЫ</b></div>
+            <div className="matchup">
+              <div><small>РАЗРАБОТКА</small><strong>8</strong><span>из 8 сотрудников</span></div>
+              <b><i>VS</i><strong>8 × 8</strong><small>ЗАЧЁТНЫЙ СОСТАВ</small></b>
+              <div><small>ПРОДАЖИ</small><strong>8</strong><span>из 32 сотрудников</span></div>
+            </div>
+            <p>Размер отдела или компании не даёт преимущества. В зачёт идут только выбранные участники и подтверждённые дни выполнения.</p>
+          </article>
+
+          <article className="business-dashboard">
+            <div className="business-card-label"><span>КОНЦЕПТ КАБИНЕТА</span><b>ПОКАЗАТЕЛИ HR</b></div>
+            <div className="dashboard-metrics">
+              <div><strong>48</strong><span>СОТРУДНИКОВ</span></div>
+              <div><strong>31</strong><span>УЧАСТВУЮТ</span></div>
+              <div><strong>65%</strong><span>ВОВЛЕЧЁННОСТЬ</span></div>
+              <div><strong>03</strong><span>СОРЕВНОВАНИЯ</span></div>
+            </div>
+            <div className="dashboard-progress"><span><i style={{ width: "65%" }} /></span><b>ПРОГРЕСС КОМАНДЫ · ПРИМЕР ИНТЕРФЕЙСА</b></div>
+          </article>
         </div>
-        <a className="button button--dark" href={APP_URL} target="_blank" rel="noreferrer">Посмотреть платформу <ArrowIcon /></a>
+
+        <div className="business-principles" data-reveal>
+          <article><UsersIcon /><div><h3>ЗАКРЫТОЕ ПРОСТРАНСТВО</h3><p>Соперники не увидят внутреннюю ленту, отчёты и данные сотрудников другой компании.</p></div></article>
+          <article><CheckIcon /><div><h3>БЕСПЛАТНО ДЛЯ СОТРУДНИКОВ</h3><p>Корпоративные челленджи не используют вступительные взносы и публичные выплаты B2C.</p></div></article>
+          <article><BoltIcon /><div><h3>B2C ОСТАНЕТСЯ КАК ЕСТЬ</h3><p>Открытые челленджи, свои вызовы и LIVE-дуэли продолжат работать отдельно.</p></div></article>
+        </div>
+
+        <article className="business-cta" data-reveal>
+          <div><span>ГОТОВИМ ПЕРВЫЙ B2B-ПИЛОТ</span><h3>ВАШ ОТДЕЛ ПРОТИВ НАШЕГО.<br /><em>ЗАБЬЁМСЯ?</em></h3></div>
+          <div><p>Функционал ещё не запущен. Сейчас мы проектируем корпоративный кабинет, равные командные составы, приватность и отдельный B2B-рейтинг.</p><a className="button button--primary" href={APP_URL} target="_blank" rel="noreferrer">Следить за запуском <ArrowIcon /></a></div>
+        </article>
       </section>
 
       <section className="faq section-shell" id="faq">
