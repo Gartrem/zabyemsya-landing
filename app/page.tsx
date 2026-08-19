@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import "@fontsource-variable/roboto-condensed";
 
 const APP_URL = "https://zabyemsya.ru/";
 
@@ -33,6 +34,23 @@ function BoltIcon() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path d="m13.2 2-8 11h6l-.4 9 8-12h-6l.4-8Z" />
+    </svg>
+  );
+}
+
+function CameraIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M14.5 5 13 3H8L6.5 5H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-5.5Z" />
+      <circle cx="10.5" cy="12.5" r="4" />
+    </svg>
+  );
+}
+
+function UsersIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
     </svg>
   );
 }
@@ -87,6 +105,33 @@ const existing = [
   "Профиль участника и достижения",
 ];
 
+const faqs = [
+  [
+    "Что такое челлендж в «ЗАБЬЁМСЯ»?",
+    "Это цель с заранее понятными правилами, сроком и способом подтверждения результата. Можно выбрать открытый вызов или создать собственный.",
+  ],
+  [
+    "Обязательно участвовать со всеми?",
+    "Нет. Проходите вызов самостоятельно, собирайте друзей или присоединяйтесь к открытому челленджу с другими участниками.",
+  ],
+  [
+    "Как подтверждается выполнение?",
+    "В зависимости от правил челленджа участник отправляет фото, видео или короткий отчёт. Требования видны до начала участия.",
+  ],
+  [
+    "Что такое LIVE-дуэль?",
+    "Это быстрый спортивный поединок на 60 секунд. Два участника подключаются одновременно, а камера помогает считать корректные повторы.",
+  ],
+  [
+    "Можно ли создать вызов для компании?",
+    "Да. Корпоративный формат — дополнительный сценарий платформы для спортивных программ внутри команды. Основные челленджи при этом открыты всем.",
+  ],
+  [
+    "Где посмотреть правила платформы?",
+    "Пользовательское соглашение и правила платформы доступны внутри приложения. Перед участием также показываются условия конкретного челленджа.",
+  ],
+];
+
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -96,12 +141,25 @@ export default function Home() {
       nodes.forEach((node) => node.classList.add("is-visible"));
       return;
     }
+
+    nodes.forEach((node) => {
+      if (node.getBoundingClientRect().top < window.innerHeight * 1.08) {
+        node.classList.add("is-visible");
+      }
+    });
+
+    const root = document.documentElement;
+    const frame = window.requestAnimationFrame(() => root.classList.add("reveal-enabled"));
     const observer = new IntersectionObserver(
       (entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("is-visible")),
       { threshold: 0.12 },
     );
     nodes.forEach((node) => observer.observe(node));
-    return () => observer.disconnect();
+    return () => {
+      window.cancelAnimationFrame(frame);
+      observer.disconnect();
+      root.classList.remove("reveal-enabled");
+    };
   }, []);
 
   return (
@@ -111,7 +169,7 @@ export default function Home() {
         <nav className={menuOpen ? "nav-open" : ""} aria-label="Основная навигация">
           <a href="#mechanics" onClick={() => setMenuOpen(false)}>Как работает</a>
           <a href="#modes" onClick={() => setMenuOpen(false)}>LIVE-дуэли</a>
-          <a href="#business" onClick={() => setMenuOpen(false)}>Для компаний</a>
+          <a href="#faq" onClick={() => setMenuOpen(false)}>Вопросы</a>
         </nav>
         <a className="header-cta" href={APP_URL} target="_blank" rel="noreferrer">Открыть приложение <ArrowIcon /></a>
         <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-label="Открыть меню" aria-expanded={menuOpen}>
@@ -124,15 +182,15 @@ export default function Home() {
         <div className="hero-copy" data-reveal>
           <div className="eyebrow"><span>●</span> ПЛАТФОРМА ДИСЦИПЛИНЫ · 2026</div>
           <h1>БРОСЬТЕ<br />ВЫЗОВ.<br /><em>НЕ СЛИВАЙТЕСЬ.</em></h1>
-          <p>Открытые челленджи для всех, собственные вызовы для себя и друзей и быстрые LIVE-дуэли. Выберите цель — или создайте свою.</p>
+          <p>Выберите цель, вступите в челлендж и подтверждайте результат каждый день. Хотите быстрее — вызовите соперника на минутную LIVE-дуэль.</p>
           <div className="hero-actions">
             <a className="button button--primary" href={APP_URL} target="_blank" rel="noreferrer">Попробовать сейчас <ArrowIcon /></a>
             <a className="button button--ghost" href="#product">Смотреть продукт <span>↓</span></a>
           </div>
           <div className="hero-stats">
-            <div><strong>30</strong><span>дней в одном ритме</span></div>
-            <div><strong>1</strong><span>выбранная цель</span></div>
-            <div><strong>0</strong><span>оправданий</span></div>
+            <div><strong>ВСЕМ</strong><span>открытые челленджи</span></div>
+            <div><strong>СВОИ</strong><span>цель, срок и правила</span></div>
+            <div><strong>60 СЕК</strong><span>быстрая LIVE-дуэль</span></div>
           </div>
         </div>
         <div className="hero-product" data-reveal>
@@ -159,10 +217,24 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="origin section-shell" data-reveal>
+        <div className="origin-index">01A</div>
+        <div className="origin-story">
+          <div className="section-kicker">ИЗ РЕАЛЬНОГО ОПЫТА</div>
+          <h2>НАЧАЛОСЬ НЕ<br />С ПРЕЗЕНТАЦИИ.<br /><em>С НАСТОЯЩЕГО ВЫЗОВА.</em></h2>
+          <p>Идея родилась из спортивного челленджа на работе. Оказалось: когда есть общая цель, понятные правила и люди рядом, слиться намного сложнее.</p>
+        </div>
+        <div className="trust-list" aria-label="Что уже работает">
+          <div><CheckIcon /><span><b>Продукт уже запущен</b><small>Можно открыть и попробовать сейчас</small></span></div>
+          <div><CheckIcon /><span><b>Правила видны заранее</b><small>Цель, срок и подтверждение до старта</small></span></div>
+          <div><CheckIcon /><span><b>Прогресс подтверждается</b><small>Фото, видео или отчёт участника</small></span></div>
+        </div>
+      </section>
+
       <section className="mechanics section-shell" id="mechanics">
         <div className="section-heading" data-reveal>
           <div><span>02 · МЕХАНИКА</span><h2>КАК ЭТО<br /><em>РАБОТАЕТ</em></h2></div>
-          <p>Четыре простых шага. Самое сложное — сделать первый.</p>
+          <p>Не просто отмечайте привычку — примите понятные правила и сделайте прогресс видимым.</p>
         </div>
         <div className="steps">
           {steps.map(([number, title, copy], index) => (
@@ -186,17 +258,27 @@ export default function Home() {
             <a className="text-link" href={APP_URL} target="_blank" rel="noreferrer">Перейти в приложение <ArrowIcon /></a>
           </div>
           <div className="product-showcase" data-reveal>
-            <div className="real-screen-card">
-              <span>ЭКРАН ВХОДА · ТЕКУЩАЯ ВЕРСИЯ</span>
-              <div className="screen-frame">
-                {/* Static <img> keeps this same component portable to GitHub Pages. */}
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="./app-login.png" alt="Экран входа в приложение Забьёмся" />
-              </div>
-            </div>
-            <div className="ui-detail-card">
-              <div className="progress-ring"><b>17</b><span>/ 30 дней</span></div>
-              <div><small>ЛИЧНАЯ СЕРИЯ</small><strong>НЕ ОСТАНАВЛИВАЙСЯ</strong><p>До следующей отметки — один отчёт.</p></div>
+            <div className="product-tour" aria-label="Основные экраны платформы">
+              <article className="tour-card tour-card--catalog">
+                <div className="tour-topline"><span>01 · ВЫБЕРИТЕ</span><b>КАТАЛОГ</b></div>
+                <div className="tour-tabs"><strong>Все</strong><span>Спорт</span><span>Привычки</span></div>
+                <div className="tour-challenge">
+                  <div className="tour-challenge-icon">🥊</div>
+                  <div><small>СПОРТ · ИДЁТ НАБОР</small><h3>30 ДНЕЙ ОТЖИМАНИЙ</h3><p>Цель, срок и правила — до вступления.</p></div>
+                </div>
+              </article>
+              <article className="tour-card tour-card--proof">
+                <div className="tour-topline"><span>02 · ДОКАЖИТЕ</span><CameraIcon /></div>
+                <div className="proof-orbit"><strong>17</strong><span>дней подряд</span></div>
+                <h3>ПОДТВЕРДИТЕ<br />СЕГОДНЯШНИЙ ДЕНЬ</h3>
+                <div className="tour-action">Добавить отчёт <ArrowIcon /></div>
+              </article>
+              <article className="tour-card tour-card--live">
+                <div className="tour-live-head"><span>LIVE</span><b>00:42</b><small>ОТЖИМАНИЯ</small></div>
+                <div className="tour-score"><div><small>ВЫ</small><strong>24</strong></div><i>VS</i><div><small>СОПЕРНИК</small><strong>21</strong></div></div>
+                <p>Повторы считаются в реальном времени.</p>
+              </article>
+              <div className="tour-caption"><span>ЖИВОЙ ПРОДУКТ</span><b>Три режима — одна цель: не слиться.</b></div>
             </div>
           </div>
         </div>
@@ -223,30 +305,42 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="business" id="business">
-        <div className="business-rings" aria-hidden="true"><i /><i /><i /></div>
-        <div className="section-shell business-grid">
-          <div className="business-copy" data-reveal>
-            <div className="section-kicker section-kicker--dark">05 · ДОПОЛНИТЕЛЬНЫЙ ФОРМАТ</div>
-            <h2>ПОДХОДИТ<br />И ДЛЯ<br /><em>КОМПАНИЙ.</em></h2>
-            <p>Основная платформа открыта каждому. А компании дополнительно могут запускать отдельные спортивные челленджи для сотрудников.</p>
-            <a className="button button--dark" href={APP_URL} target="_blank" rel="noreferrer">Посмотреть платформу <ArrowIcon /></a>
-          </div>
-          <div className="business-features" data-reveal>
-            <article><span>01</span><div><h3>БРЕНДИРОВАННЫЙ ВЫЗОВ</h3><p>Отдельная программа под культуру, цели и ритм вашей команды.</p></div></article>
-            <article><span>02</span><div><h3>КОМАНДЫ И ОТДЕЛЫ</h3><p>Общий движ, поддержка коллег и здоровое соревнование.</p></div></article>
-            <article><span>03</span><div><h3>ПРОГРЕСС БЕЗ ДОГАДОК</h3><p>Участие, серии и результаты собраны в одном месте.</p></div></article>
-          </div>
-        </div>
-      </section>
-
       <section className="categories section-shell" data-reveal>
-        <div className="section-kicker">06 · ВЫБЕРИ СВОЁ</div>
+        <div className="section-kicker">05 · ВЫБЕРИ СВОЁ</div>
         <div className="category-rows">
           <div><span>01</span><b>СПОРТ</b><i>СИЛА · БЕГ · ВЫНОСЛИВОСТЬ</i><em>↗</em></div>
           <div><span>02</span><b>ПРИВЫЧКИ</b><i>РЕЖИМ · ФОКУС · ДИСЦИПЛИНА</i><em>↗</em></div>
           <div><span>03</span><b>РАЗВИТИЕ</b><i>ЧТЕНИЕ · НАВЫКИ · ПРОГРЕСС</i><em>↗</em></div>
           <div><span>04</span><b>ДУЭЛИ</b><i>МИНУТА · СОПЕРНИК · РЕЙТИНГ</i><em>↗</em></div>
+        </div>
+      </section>
+
+      <section className="business section-shell" id="business" data-reveal>
+        <div className="business-rings" aria-hidden="true"><i /><i /><i /></div>
+        <div className="business-copy">
+          <div className="section-kicker section-kicker--dark">06 · ДОПОЛНИТЕЛЬНЫЙ ФОРМАТ</div>
+          <h2>ЧЕЛЛЕНДЖИ<br /><em>ДЛЯ КОМАНД.</em></h2>
+          <p>Основная платформа открыта каждому. Компании могут дополнительно проводить отдельные спортивные вызовы для сотрудников.</p>
+        </div>
+        <div className="business-features">
+          <article><UsersIcon /><div><h3>СВОЯ КОМАНДА</h3><p>Единая цель, общий ритм и поддержка коллег.</p></div></article>
+          <article><CheckIcon /><div><h3>ПОНЯТНЫЙ ПРОГРЕСС</h3><p>Серии и подтверждённые результаты в одном месте.</p></div></article>
+        </div>
+        <a className="button button--dark" href={APP_URL} target="_blank" rel="noreferrer">Посмотреть платформу <ArrowIcon /></a>
+      </section>
+
+      <section className="faq section-shell" id="faq">
+        <div className="section-heading" data-reveal>
+          <div><span>07 · БЕЗ МЕЛКОГО ШРИФТА</span><h2>ЧАСТЫЕ<br /><em>ВОПРОСЫ</em></h2></div>
+          <p>Коротко о механике, подтверждениях, LIVE-дуэлях и правилах платформы.</p>
+        </div>
+        <div className="faq-list" data-reveal>
+          {faqs.map(([question, answer], index) => (
+            <details key={question}>
+              <summary><span>{String(index + 1).padStart(2, "0")}</span><b>{question}</b><i aria-hidden="true">+</i></summary>
+              <p>{answer}</p>
+            </details>
+          ))}
         </div>
       </section>
 
@@ -259,10 +353,16 @@ export default function Home() {
       </section>
 
       <footer className="footer section-shell">
-        <a className="logo" href="#top"><BrandMark /><span>ЗАБЬЁМСЯ</span></a>
-        <p>Платформа дисциплины и достижения целей.</p>
-        <div><a href="#mechanics">Механика</a><a href="#modes">LIVE-дуэли</a><a href="#business">Компаниям</a></div>
-        <span>© 2026 · MVP</span>
+        <div className="footer-brand">
+          <a className="logo" href="#top"><BrandMark /><span>ЗАБЬЁМСЯ</span></a>
+          <p>Платформа дисциплины и достижения целей.</p>
+        </div>
+        <nav className="footer-nav" aria-label="Разделы сайта"><a href="#mechanics">Механика</a><a href="#modes">LIVE-дуэли</a><a href="#business">Компаниям</a><a href="#faq">Вопросы</a></nav>
+        <div className="footer-docs">
+          <span>Документы и поддержка доступны внутри приложения</span>
+          <div><a href={APP_URL} target="_blank" rel="noreferrer">Пользовательское соглашение</a><a href={APP_URL} target="_blank" rel="noreferrer">Правила платформы</a><a href={APP_URL} target="_blank" rel="noreferrer">Поддержка</a></div>
+        </div>
+        <span className="footer-copy">© 2026 ЗАБЬЁМСЯ</span>
       </footer>
     </main>
   );
