@@ -80,7 +80,7 @@ function PhoneScreen({ compact = false }: { compact?: boolean }) {
         <div className="challenge-content">
           <div className="challenge-meta"><span>● Активен</span><b>СПОРТ</b></div>
           <h4>🥊 ОТЖИМАНИЯ<br />МАЙКА ТАЙСОНА</h4>
-          <p>30 дней · 5 участников</p>
+          <p>30 дней · 14 участников</p>
         </div>
         <strong className="challenge-days">30</strong>
       </div>
@@ -103,6 +103,36 @@ const existing = [
   "Ежедневные отчёты и серия дней",
   "Фото- и видеоподтверждения",
   "Профиль участника и достижения",
+];
+
+const challengeRuns = [
+  {
+    status: "ЗАВЕРШЁН",
+    title: "ПЕРВЫЙ ЧЕЛЛЕНДЖ",
+    meta: "16 человек начали",
+    result: "13",
+    resultLabel: "остались до конца",
+    progress: "81%",
+    tone: "complete",
+  },
+  {
+    status: "ИДЁТ СЕЙЧАС",
+    title: "ОТЖИМАНИЯ МАЙКА ТАЙСОНА",
+    meta: "Спортивный челлендж",
+    result: "14",
+    resultLabel: "участников",
+    progress: "LIVE",
+    tone: "active",
+  },
+  {
+    status: "ИДЁТ СЕЙЧАС",
+    title: "ЯГОДИЦЫ",
+    meta: "Тренировочный челлендж",
+    result: "10",
+    resultLabel: "участниц",
+    progress: "LIVE",
+    tone: "active",
+  },
 ];
 
 const faqs = [
@@ -168,6 +198,7 @@ export default function Home() {
         <a className="logo" href="#top" aria-label="Забьёмся — на главную"><BrandMark /><span>ЗАБЬЁМСЯ</span></a>
         <nav className={menuOpen ? "nav-open" : ""} aria-label="Основная навигация">
           <a href="#mechanics" onClick={() => setMenuOpen(false)}>Как работает</a>
+          <a href="#results" onClick={() => setMenuOpen(false)}>Уже участвуют</a>
           <a href="#modes" onClick={() => setMenuOpen(false)}>LIVE-дуэли</a>
           <a href="#faq" onClick={() => setMenuOpen(false)}>Вопросы</a>
         </nav>
@@ -188,9 +219,9 @@ export default function Home() {
             <a className="button button--ghost" href="#product">Смотреть продукт <span>↓</span></a>
           </div>
           <div className="hero-stats">
-            <div><strong>ВСЕМ</strong><span>открытые челленджи</span></div>
-            <div><strong>СВОИ</strong><span>цель, срок и правила</span></div>
-            <div><strong>60 СЕК</strong><span>быстрая LIVE-дуэль</span></div>
+            <div><strong>3</strong><span>челленджа запущено</span></div>
+            <div><strong>40</strong><span>участий в потоках</span></div>
+            <div><strong>СЕЗОН 01</strong><span>LIVE-дуэли уже идут</span></div>
           </div>
         </div>
         <div className="hero-product" data-reveal>
@@ -231,9 +262,73 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="results section-shell" id="results">
+        <div className="results-heading" data-reveal>
+          <div>
+            <div className="section-kicker">02 · УЖЕ В ДЕЛЕ</div>
+            <h2>НЕ ОБЕЩАЕМ.<br /><em>УЖЕ ПРОВОДИМ.</em></h2>
+          </div>
+          <p>Первые участники уже проверяют формат на себе. Один челлендж завершён, ещё два идут прямо сейчас.</p>
+        </div>
+
+        <div className="results-summary" data-reveal aria-label="Результаты первых челленджей">
+          <div><strong>3</strong><span>запущенных<br />челленджа</span></div>
+          <div><strong>40</strong><span>участий<br />в потоках</span></div>
+          <div><strong>13/16</strong><span>остались<br />в первом</span></div>
+          <div><strong>2</strong><span>челленджа<br />идут сейчас</span></div>
+        </div>
+
+        <div className="run-grid">
+          {challengeRuns.map((run, index) => (
+            <article className={`run-card run-card--${run.tone}`} data-reveal key={run.title} style={{ "--delay": `${index * 90}ms` } as React.CSSProperties}>
+              <div className="run-card-top"><span>{run.status}</span><b>{String(index + 1).padStart(2, "0")}</b></div>
+              <div className="run-progress"><i style={{ width: run.progress === "81%" ? "81%" : "100%" }} /></div>
+              <small>{run.meta}</small>
+              <h3>{run.title}</h3>
+              <div className="run-result"><strong>{run.result}</strong><span>{run.resultLabel}</span></div>
+              <em>{run.progress}</em>
+            </article>
+          ))}
+        </div>
+
+        <article className="season-proof" data-reveal>
+          <div className="season-signal"><span>LIVE</span><i /></div>
+          <div className="season-copy">
+            <small>LIVE-ДУЭЛИ · СЕЗОН 01</small>
+            <h3>ПЕРВЫЙ СЕЗОН<br /><em>УЖЕ ЗАПУЩЕН</em></h3>
+            <p>Участники соревнуются в минутных дуэлях, набирают рейтинг и поднимаются в таблице сезона.</p>
+          </div>
+          <div className="season-disciplines">
+            <span><b>01</b> ОТЖИМАНИЯ</span>
+            <span><b>02</b> ПРИСЕДАНИЯ</span>
+          </div>
+          <a className="button button--primary" href={APP_URL} target="_blank" rel="noreferrer">Смотреть сезон <ArrowIcon /></a>
+        </article>
+      </section>
+
+      <section className="reviews section-shell" id="reviews" data-reveal>
+        <div className="review-index" aria-hidden="true">“</div>
+        <div className="review-heading">
+          <div className="section-kicker">РЕАЛЬНЫЙ ОТЗЫВ · ПЕРВЫЙ ПОТОК</div>
+          <h2>«Я БЫЛА УВЕРЕНА,<br />ЧТО ВЫЛЕЧУ ПЕРВОЙ…»</h2>
+        </div>
+        <article className="review-card">
+          <blockquote>«Хочу сказать спасибо за новый опыт. Это было в новинку для меня. Я со спортом на “вы” последние 6 лет и даже была уверена, что вылечу первой… Но, блин, это было круто!»</blockquote>
+          <div className="review-author">
+            <span>О</span>
+            <div><strong>ОЛЬГА Ш.</strong><small>Участница первого челленджа</small></div>
+          </div>
+          <div className="review-source"><i /> ОТЗЫВ ИЗ TELEGRAM</div>
+        </article>
+        <aside className="review-fact">
+          <strong>13 <i>из</i> 16</strong>
+          <span>участников продолжили<br />первый челлендж</span>
+        </aside>
+      </section>
+
       <section className="mechanics section-shell" id="mechanics">
         <div className="section-heading" data-reveal>
-          <div><span>02 · МЕХАНИКА</span><h2>КАК ЭТО<br /><em>РАБОТАЕТ</em></h2></div>
+          <div><span>03 · МЕХАНИКА</span><h2>КАК ЭТО<br /><em>РАБОТАЕТ</em></h2></div>
           <p>Не просто отмечайте привычку — примите понятные правила и сделайте прогресс видимым.</p>
         </div>
         <div className="steps">
@@ -249,7 +344,7 @@ export default function Home() {
       <section className="product-section" id="product">
         <div className="section-shell product-grid">
           <div className="product-copy" data-reveal>
-            <div className="section-kicker">03 · УЖЕ РАБОТАЕТ</div>
+            <div className="section-kicker">04 · УЖЕ РАБОТАЕТ</div>
             <h2>НЕ КОНЦЕПТ.<br /><em>ЖИВОЙ ПРОДУКТ.</em></h2>
             <p>Платформа уже запущена: участвуйте в открытых челленджах, создавайте собственные для себя и друзей или выходите на LIVE-дуэль.</p>
             <ul>
@@ -286,19 +381,19 @@ export default function Home() {
 
       <section className="future section-shell" id="modes">
         <div className="section-heading" data-reveal>
-          <div><span>04 · РЕЖИМЫ ПЛАТФОРМЫ</span><h2>ВЫБЕРИТЕ<br /><em>СВОЙ ФОРМАТ</em></h2></div>
+          <div><span>05 · РЕЖИМЫ ПЛАТФОРМЫ</span><h2>ВЫБЕРИТЕ<br /><em>СВОЙ ФОРМАТ</em></h2></div>
           <p>Открытые вызовы, свои компании друзей и быстрые LIVE-дуэли — всё уже внутри.</p>
         </div>
         <div className="future-grid">
           <article className="future-main" data-reveal>
-            <div className="future-badge">УЖЕ ДОСТУПНО</div>
+            <div className="future-badge">СЕЗОН 01 · УЖЕ ИДЁТ</div>
             <div className="duel-visual">
               <div className="duel-player"><span>01</span><b>ВЫ</b><strong>24</strong></div>
               <div className="duel-center"><small>LIVE</small><b>00:42</b><span>ОТЖИМАНИЯ</span></div>
               <div className="duel-player duel-player--right"><span>02</span><b>СОПЕРНИК</b><strong>21</strong></div>
             </div>
             <h3>LIVE-ДУЭЛИ</h3>
-            <p>Минута. Два участника. Камера считает повторы — результат видно сразу.</p>
+            <p>Первый рейтинговый сезон уже запущен: минута, два участника и две дисциплины — отжимания и приседания.</p>
           </article>
           <article className="future-card" data-reveal><span>СОЗДАВАЙТЕ</span><div className="future-number">#01</div><h3>СВОЙ ЧЕЛЛЕНДЖ</h3><p>Задайте цель, срок и правила. Проходите вызов сами или откройте его для всех.</p></article>
           <article className="future-card future-card--acid" data-reveal><span>ВМЕСТЕ</span><div className="future-number">#02</div><h3>ДЛЯ ДРУЗЕЙ</h3><p>Соберите своих, следите за общей серией и поддерживайте друг друга до финиша.</p></article>
@@ -306,7 +401,7 @@ export default function Home() {
       </section>
 
       <section className="categories section-shell" data-reveal>
-        <div className="section-kicker">05 · ВЫБЕРИ СВОЁ</div>
+        <div className="section-kicker">06 · ВЫБЕРИ СВОЁ</div>
         <div className="category-rows">
           <div><span>01</span><b>СПОРТ</b><i>СИЛА · БЕГ · ВЫНОСЛИВОСТЬ</i><em>↗</em></div>
           <div><span>02</span><b>ПРИВЫЧКИ</b><i>РЕЖИМ · ФОКУС · ДИСЦИПЛИНА</i><em>↗</em></div>
@@ -318,7 +413,7 @@ export default function Home() {
       <section className="business section-shell" id="business" data-reveal>
         <div className="business-rings" aria-hidden="true"><i /><i /><i /></div>
         <div className="business-copy">
-          <div className="section-kicker section-kicker--dark">06 · ДОПОЛНИТЕЛЬНЫЙ ФОРМАТ</div>
+          <div className="section-kicker section-kicker--dark">07 · ДОПОЛНИТЕЛЬНЫЙ ФОРМАТ</div>
           <h2>ЧЕЛЛЕНДЖИ<br /><em>ДЛЯ КОМАНД.</em></h2>
           <p>Основная платформа открыта каждому. Компании могут дополнительно проводить отдельные спортивные вызовы для сотрудников.</p>
         </div>
@@ -331,7 +426,7 @@ export default function Home() {
 
       <section className="faq section-shell" id="faq">
         <div className="section-heading" data-reveal>
-          <div><span>07 · БЕЗ МЕЛКОГО ШРИФТА</span><h2>ЧАСТЫЕ<br /><em>ВОПРОСЫ</em></h2></div>
+          <div><span>08 · БЕЗ МЕЛКОГО ШРИФТА</span><h2>ЧАСТЫЕ<br /><em>ВОПРОСЫ</em></h2></div>
           <p>Коротко о механике, подтверждениях, LIVE-дуэлях и правилах платформы.</p>
         </div>
         <div className="faq-list" data-reveal>
@@ -357,7 +452,7 @@ export default function Home() {
           <a className="logo" href="#top"><BrandMark /><span>ЗАБЬЁМСЯ</span></a>
           <p>Платформа дисциплины и достижения целей.</p>
         </div>
-        <nav className="footer-nav" aria-label="Разделы сайта"><a href="#mechanics">Механика</a><a href="#modes">LIVE-дуэли</a><a href="#business">Компаниям</a><a href="#faq">Вопросы</a></nav>
+        <nav className="footer-nav" aria-label="Разделы сайта"><a href="#results">Результаты</a><a href="#reviews">Отзывы</a><a href="#mechanics">Механика</a><a href="#modes">LIVE-дуэли</a><a href="#business">Компаниям</a><a href="#faq">Вопросы</a></nav>
         <div className="footer-docs">
           <span>Документы и поддержка доступны внутри приложения</span>
           <div><a href={APP_URL} target="_blank" rel="noreferrer">Пользовательское соглашение</a><a href={APP_URL} target="_blank" rel="noreferrer">Правила платформы</a><a href={APP_URL} target="_blank" rel="noreferrer">Поддержка</a></div>
