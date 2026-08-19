@@ -308,22 +308,44 @@ export default function Home() {
 
       <section className="reviews section-shell" id="reviews" data-reveal>
         <div className="review-index" aria-hidden="true">“</div>
-        <div className="review-heading">
-          <div className="section-kicker">РЕАЛЬНЫЙ ОТЗЫВ · ПЕРВЫЙ ПОТОК</div>
-          <h2>«Я БЫЛА УВЕРЕНА,<br />ЧТО ВЫЛЕЧУ ПЕРВОЙ…»</h2>
-        </div>
-        <article className="review-card">
-          <blockquote>«Хочу сказать спасибо за новый опыт. Это было в новинку для меня. Я со спортом на “вы” последние 6 лет и даже была уверена, что вылечу первой… Но, блин, это было круто!»</blockquote>
-          <div className="review-author">
-            <span>О</span>
-            <div><strong>ОЛЬГА Ш.</strong><small>Участница первого челленджа</small></div>
+        <div className="review-top">
+          <div className="review-heading">
+            <div className="section-kicker">РЕАЛЬНЫЕ ОТЗЫВЫ · ПЕРВЫЕ УЧАСТНИКИ</div>
+            <h2>ГОВОРЯТ ТЕ,<br />КТО <em>НЕ СЛИЛСЯ.</em></h2>
           </div>
-          <div className="review-source"><i /> ОТЗЫВ ИЗ TELEGRAM</div>
-        </article>
-        <aside className="review-fact">
-          <strong>13 <i>из</i> 16</strong>
-          <span>участников продолжили<br />первый челлендж</span>
-        </aside>
+          <aside className="review-fact">
+            <strong>13 <i>из</i> 16</strong>
+            <span>участников продолжили<br />первый челлендж</span>
+          </aside>
+        </div>
+        <div className="review-grid">
+          <article className="review-card review-card--featured">
+            <div className="review-quote-mark" aria-hidden="true">“</div>
+            <blockquote>«Хочу сказать спасибо за новый опыт. Это было в новинку для меня. Я со спортом на “вы” последние 6 лет и даже была уверена, что вылечу первой… Но, блин, это было круто!»</blockquote>
+            <div className="review-card-bottom">
+              <div className="review-author"><span>О</span><div><strong>ОЛЬГА Ш.</strong><small>Участница первого челленджа</small></div></div>
+              <div className="review-source"><i /> ОТЗЫВ ИЗ TELEGRAM</div>
+            </div>
+          </article>
+
+          <article className="review-card review-card--compact">
+            <div className="review-card-number">01</div>
+            <blockquote>«Сначала думал, что меня хватит максимум на неделю. Но когда каждый день видишь отчёты других участников, уже как-то неловко самому пропускать. В итоге втянулся, и тренировки действительно стали привычкой».</blockquote>
+            <div className="review-card-bottom"><div className="review-author"><span>У</span><div><strong>УЧАСТНИК</strong><small>Первый поток</small></div></div></div>
+          </article>
+
+          <article className="review-card review-card--compact">
+            <div className="review-card-number">02</div>
+            <blockquote>«Обычно я постоянно откладывала тренировки: сегодня устала, завтра начну. А здесь есть конкретная цель и люди, которые проходят всё вместе с тобой. Именно этого мне раньше и не хватало».</blockquote>
+            <div className="review-card-bottom"><div className="review-author"><span>У</span><div><strong>УЧАСТНИЦА</strong><small>Спортивный челлендж</small></div></div></div>
+          </article>
+
+          <article className="review-card review-card--compact review-card--live">
+            <div className="review-card-number">LIVE</div>
+            <blockquote>«Думал, что минута — это вообще легко. Потом вышел на LIVE-дуэль и на последних секундах уже еле двигался. Зато эмоций как после настоящего соревнования — сразу хочется взять реванш».</blockquote>
+            <div className="review-card-bottom"><div className="review-author"><span>⚔</span><div><strong>УЧАСТНИК</strong><small>LIVE-дуэли · сезон 01</small></div></div></div>
+          </article>
+        </div>
       </section>
 
       <section className="mechanics section-shell" id="mechanics">
