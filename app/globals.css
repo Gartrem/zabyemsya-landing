@@ -14,6 +14,9 @@
 
 * { box-sizing: border-box; }
 
+main, section, article, aside, header, footer, nav, div { min-width: 0; }
+img, video, canvas { max-width: 100%; height: auto; }
+
 html { scroll-behavior: smooth; background: var(--ink); }
 
 body {
@@ -556,6 +559,9 @@ em { color: var(--acid); font-style: normal; }
 }
 
 @media (max-width: 540px) {
+  html, body { width: 100%; max-width: 100%; overflow-x: clip; }
+  .section-shell { width: calc(100% - 24px); max-width: 100%; }
+  .button { width: 100%; max-width: 100%; min-width: 0; padding-inline: 16px; gap: 12px; white-space: normal; text-align: center; line-height: 1.2; }
   .hero { padding-inline: 14px; }
   .hero-copy { padding-inline: 4px; }
   .hero h1 { font-size: clamp(56px, 17.5vw, 79px); }
@@ -564,8 +570,10 @@ em { color: var(--acid); font-style: normal; }
   .hero-stats { margin-top: 45px; }
   .hero-stats div { display: block; }
   .hero-stats strong { display: block; margin-bottom: 7px; }
-  .hero-product { min-height: 630px; transform: scale(.88); transform-origin: top center; margin-bottom: -80px; }
-  .product-phone { width: 350px; }
+  .hero-product { width: 100%; min-height: 735px; transform: none; margin-bottom: 0; overflow: hidden; }
+  .product-phone { width: min(350px, calc(100vw - 28px)); max-width: 100%; }
+  .phone-halo { width: min(480px, 120vw); height: min(480px, 120vw); }
+  .floating-card { max-width: calc(100vw - 36px); }
   .floating-card--left { left: 0; }
   .floating-card--right { right: 0; }
   .marquee div { font-size: 17px; }
@@ -580,10 +588,10 @@ em { color: var(--acid); font-style: normal; }
   .results-summary strong { font-size: 43px; }
   .run-card { min-height: 340px; padding: 21px; }
   .run-card h3 { margin-bottom: 40px; }
-  .season-proof { padding: 25px 20px; grid-template-columns: 1fr; }
+  .season-proof { width: 100%; padding: 25px 20px; grid-template-columns: minmax(0, 1fr); }
   .season-signal { width: 54px; height: 54px; }
   .season-disciplines, .season-proof .button { grid-column: auto; }
-  .reviews { width: calc(100% - 20px); margin-bottom: 70px; padding: 29px 20px; border-radius: 21px; }
+  .reviews { width: calc(100% - 24px); max-width: 100%; margin-bottom: 70px; padding: 29px 20px; border-radius: 21px; }
   .review-heading h2 { font-size: 42px; }
   .review-grid { margin-top: 32px; }
   .review-card { min-height: 360px; padding: 25px 22px; }
@@ -597,7 +605,7 @@ em { color: var(--acid); font-style: normal; }
   .step-icon { margin: 40px 0 28px; }
   .product-copy ul { gap: 16px; }
   .product-showcase { min-height: 835px; }
-  .product-tour { grid-template-columns: 1fr; transform: none; }
+  .product-tour { width: 100%; max-width: 100%; grid-template-columns: minmax(0, 1fr); transform: none; }
   .tour-card--catalog { grid-row: auto; min-height: 390px; }
   .tour-challenge { min-height: 255px; }
   .tour-caption { grid-column: auto; flex-direction: column; gap: 6px; }
@@ -608,17 +616,18 @@ em { color: var(--acid); font-style: normal; }
   .future-main { padding: 18px; min-height: 525px; }
   .future-main h3 { font-size: 36px; }
   .category-rows b { font-size: 34px; }
-  .business-stage { width: calc(100% - 20px); }
+  .business-stage { width: calc(100% - 24px); max-width: 100%; }
   .business-hero { padding: 30px 22px; border-radius: 22px; }
   .business-headline-row { align-items: flex-start; flex-direction: column; }
   .business-dev-badge { align-self: flex-start; }
   .business-copy h2 { font-size: 46px; }
   .business-copy > p { font-size: 14px; }
   .business-levels article { min-height: 270px; padding: 23px; }
+  .business-levels, .business-system, .business-principles, .business-cta { width: 100%; max-width: 100%; }
   .business-levels span { left: 23px; top: 23px; }
   .fair-match, .business-dashboard { min-height: auto; padding: 22px; }
   .business-card-label { flex-direction: column; gap: 6px; }
-  .matchup { margin: 42px 0 30px; grid-template-columns: 1fr .58fr 1fr; gap: 6px; }
+  .matchup { width: 100%; margin: 42px 0 30px; grid-template-columns: minmax(0,1fr) minmax(42px,.58fr) minmax(0,1fr); gap: 6px; }
   .matchup > div { min-height: 155px; padding: 14px 7px; }
   .matchup > div strong { font-size: 54px; }
   .matchup > div small { font-size: 6px; }
@@ -632,8 +641,31 @@ em { color: var(--acid); font-style: normal; }
   .faq-list summary { grid-template-columns: 35px 1fr 38px; gap: 10px; min-height: 78px; }
   .faq-list details p { margin: 0 42px 24px 45px; font-size: 14px; }
   .final-cta { min-height: 560px; padding-inline: 16px; }
-  .final-cta h2 { font-size: clamp(70px, 22vw, 96px); }
+  .final-cta h2 { max-width: 100%; font-size: clamp(48px, 18vw, 76px); overflow-wrap: anywhere; }
   .footer-docs div { gap: 15px; }
+}
+
+@media (max-width: 380px) {
+  .hero { padding-inline: 12px; }
+  .hero h1 { font-size: clamp(50px, 16.5vw, 62px); }
+  .hero-copy > p { font-size: 14px; }
+  .hero-stats { display: grid; grid-template-columns: 1fr 1fr; }
+  .hero-stats div { padding: 16px 8px 0 0; }
+  .product-phone { width: calc(100vw - 24px); border-radius: 30px; }
+  .phone-copy h3 { font-size: 36px; }
+  .floating-card { display: none; }
+  .origin, .reviews, .business-stage { width: calc(100% - 16px); }
+  .business-hero, .fair-match, .business-dashboard, .business-cta { padding-inline: 18px; }
+  .business-copy h2 { font-size: 41px; }
+  .matchup > div { min-height: 145px; padding-inline: 5px; }
+  .matchup > div strong { font-size: 46px; }
+  .dashboard-metrics { grid-template-columns: minmax(0,1fr); }
+  .dashboard-metrics div, .dashboard-metrics div:nth-child(2n), .dashboard-metrics div:nth-child(n+3) { border-right: 0; border-bottom: 1px solid #29312a; }
+  .dashboard-metrics div:last-child { border-bottom: 0; }
+  .category-rows > div { grid-template-columns: 30px minmax(0,1fr) 28px; padding-inline: 0; }
+  .category-rows b { font-size: 30px; overflow-wrap: anywhere; }
+  .faq-list summary { grid-template-columns: 26px minmax(0,1fr) 34px; gap: 8px; }
+  .faq-list details p { margin-inline: 34px 8px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
