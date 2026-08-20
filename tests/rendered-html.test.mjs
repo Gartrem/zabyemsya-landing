@@ -32,6 +32,10 @@ test("renders the landing and the future B2B announcement", async () => {
   assert.match(html, /ЗАБЬЁМСЯ[\s\S]*ДЛЯ БИЗНЕСА/i);
   assert.match(html, /В РАЗРАБОТКЕ/i);
   assert.match(html, /Функционал ещё не запущен/i);
+  assert.match(html, /КАК ЭТО БУДЕТ РАБОТАТЬ/i);
+  assert.match(html, /14 ДНЕЙ · 10 × 10/i);
+  assert.match(html, /86%/i);
+  assert.match(html, /Сотрудникам придётся платить за корпоративный челлендж/i);
 });
 
 test("keeps narrow mobile layouts inside the viewport", async () => {
